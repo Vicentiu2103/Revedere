@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Counter cu Tranziție Imagini</title>
     <style>
-        /* Stilurile rămân neschimbate */
         body {
             display: flex;
             flex-direction: column;
@@ -17,6 +16,36 @@
             background-size: cover;
             margin: 0;
             color: #fff;
+            overflow: hidden; /* Evită scroll-ul dacă e necesar */
+        }
+
+        header {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            font-size: 0.5em;
+        }
+
+        footer {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9em;
         }
 
         .slideshow-container {
@@ -25,7 +54,7 @@
             max-width: 800px;
             height: 60vw;
             max-height: 400px;
-            margin-bottom: 20px;
+            margin-top: 60px; /* Așezare sub header */
             overflow: hidden;
             border-radius: 10px;
             background-color: #333;
@@ -57,6 +86,8 @@
             flex-wrap: wrap;
             gap: 10px;
             justify-content: center;
+            margin-top: 20px;
+            margin-bottom: 10px; /* Spațiu mic pentru butonul de înscriere */
         }
 
         .flip-card {
@@ -122,17 +153,8 @@
             background-color: #717171;
         }
 
-        .message {
-            margin-top: 20px;
-            font-size: 1em;
-            color: #fff;
-            text-align: center;
-            padding: 0 10px;
-        }
-
         /* Stiluri pentru buton */
         .button-container {
-            margin-top: 20px;
             text-align: center;
         }
 
@@ -145,6 +167,7 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
+            margin: 5px; /* Spațiu între butoane */
         }
 
         .button-container button:hover {
@@ -162,11 +185,6 @@
             .counter-container {
                 flex-direction: column;
                 gap: 5px;
-            }
-
-            .message {
-                font-size: 0.9em;
-                padding: 0 5px;
             }
 
             .button-container button {
@@ -190,11 +208,6 @@
                 font-size: 0.8em;
             }
 
-            .message {
-                font-size: 0.8em;
-                padding: 0 2px;
-            }
-
             .button-container button {
                 padding: 6px 12px;
                 font-size: 0.8em;
@@ -203,6 +216,10 @@
     </style>
 </head>
 <body>
+    <header>
+        <h1>Clasa a XII-a E MI</h1>
+    </header>
+
     <!-- Containerul pentru slideshow -->
     <div class="slideshow-container">
         <div class="slide">
@@ -272,15 +289,17 @@
         </div>
     </div>
 
-    <!-- Mesaj de sub counter -->
-    <div class="message">
-        Vă așteptăm cu mare drag să ne revedem!
-    </div>
-
-    <!-- Containerul pentru buton -->
+    <!-- Containerul pentru butoane -->
     <div class="button-container">
         <button onclick="window.location.href='Inscriere.html'">Înscrie-te acum</button>
+        <button onclick="window.location.href='Locatii.html'">Vezi locațiile</button>
     </div>
+
+    <footer>
+        <div>Contact: Adina Chelu +40769534552</div>
+        <div>Vă așteptăm cu mare drag să ne revedem!</div>
+        <div>Contact: Vicentiu Ilie +40739554520</div>
+    </footer>
 
     <script>
         // Funcția pentru actualizarea counter-ului

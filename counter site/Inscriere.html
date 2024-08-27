@@ -7,43 +7,92 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: url('images/mountain-landscape.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: #fff; /* Culoare albă pentru text pentru a fi vizibil pe fundal întunecat */
             margin: 0;
             padding: 0;
+            background: url('images/mountain-landscape.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+        }
+
+        header {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-align: center;
+            padding: 5px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            font-size: 0.5em;
+        }
+
+        footer {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-align: center;
+            padding: 5px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 1000;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            height: 100vh;
+            font-size: 0.9em;
         }
 
         .form-container {
-            background-color: rgba(0, 0, 0, 0.7); /* Fundal negru semi-transparent pentru a face textul mai ușor de citit */
+            max-width: 600px;
+            margin: 80px auto 60px; /* Adjusted for header and footer */
             padding: 20px;
+            background: #fff;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            width: 100%;
-            max-width: 800px;
-        }
-
-        .form-container h1 {
-            text-align: center;
-            color: #008CBA;
-            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         iframe {
             width: 100%;
-            height: 800px; /* Ajustează înălțimea după cum este necesar */
+            height: 600px;
             border: none;
+        }
+
+        .home-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .home-button:hover {
+            background-color: #005f6b;
         }
     </style>
 </head>
 <body>
+    <header>
+        <h1>Clasa a XII-a E</h1>
+    </header>
+
     <div class="form-container">
-        <h1>Formular de Înscriere</h1>
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeuj7Dz1IglETMkArOlbTZCTkw0Qh44WopffRuo_0dpjxxNfw/viewform?embedded=true" allowfullscreen></iframe>
+        <h1>Înscriere</h1>
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeuj7Dz1IglETMkArOlbTZCTkw0Qh44WopffRuo_0dpjxxNfw/viewform?embedded=true" 
+                title="Formular de Înscriere">
+            Loading…
+        </iframe>
+        <button class="home-button" onclick="window.location.href='Counter.html'">Home</button>
     </div>
+
+    <footer>
+        <div>Contact: Adina Chelu +40769534552</div>
+        <div>Înscrierea a fost efectuată!</div>
+        <div>Contact: Vicentiu Ilie +40739554520</div>
+    </footer>
 </body>
 </html>

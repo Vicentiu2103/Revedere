@@ -3,41 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mulțumesc!</title>
+    <title>Mulțumiri</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background: url('images/mountain-landscape.jpg') no-repeat center center fixed;
             background-size: cover;
-            color: #fff;
             margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .message-container {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            width: 100%;
-            max-width: 600px;
+            color: #fff;
             text-align: center;
         }
 
-        .message-container h1 {
-            color: #008CBA;
-            margin-bottom: 20px;
+        header {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            font-size: 0.5em;
+        }
+
+        footer {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9em;
+        }
+
+        .button-container {
+            margin-top: 60px; /* Ajustare pentru a fi sub header */
+        }
+
+        .button-container button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 5px;
+        }
+
+        .button-container button:hover {
+            background-color: #005f6b;
         }
     </style>
 </head>
 <body>
-    <div class="message-container">
-        <h1>Mulțumim pentru înscriere!</h1>
-        <p>Am primit informațiile tale și îți vom răspunde în curând. Te așteptăm cu nerăbdare!</p>
+    <header>
+        <h1>Clasa a XII-a E</h1>
+    </header>
+
+    <div class="button-container">
+        <button onclick="window.location.href='Counter.html'">Home</button>
+        <button onclick="window.location.href='Locatii.html'">Vezi locațiile</button>
     </div>
+
+    <footer>
+        <div>Contact: Adina Chelu +40769534552</div>
+        <div>Vă mulțumim pentru participare!</div>
+        <div>Contact: Vicentiu Ilie +40739554520</div>
+    </footer>
 </body>
 </html>
