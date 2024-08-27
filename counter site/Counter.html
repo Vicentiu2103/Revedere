@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Counter cu Tranziție Imagini</title>
     <style>
+        /* Stilurile rămân neschimbate */
         body {
             display: flex;
             flex-direction: column;
@@ -15,7 +16,7 @@
             background: url('images/mountain-landscape.jpg') no-repeat center center fixed;
             background-size: cover;
             margin: 0;
-            color: #fff; /* Text alb pentru a fi vizibil pe fundal întunecat */
+            color: #fff;
         }
 
         .slideshow-container {
@@ -27,7 +28,7 @@
             margin-bottom: 20px;
             overflow: hidden;
             border-radius: 10px;
-            background-color: #333; /* Culoare de fundal pentru cazul în care nu sunt imagini */
+            background-color: #333;
         }
 
         .slide {
@@ -83,7 +84,7 @@
             align-items: center;
             font-size: 1.5em;
             background-color: #333;
-            color: #fff; /* Alb pentru textul cardurilor */
+            color: #fff;
             border-radius: 10px;
         }
 
@@ -98,7 +99,7 @@
         .label {
             margin-top: 10px;
             font-size: 0.9em;
-            color: #fff; /* Alb pentru textul labelurilor */
+            color: #fff;
             text-align: center;
         }
 
@@ -124,12 +125,33 @@
         .message {
             margin-top: 20px;
             font-size: 1em;
-            color: #fff; /* Alb pentru mesajul de sub counter */
+            color: #fff;
             text-align: center;
             padding: 0 10px;
         }
 
-        /* Media queries pentru ecrane mici */
+        /* Stiluri pentru buton */
+        .button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .button-container button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button-container button:hover {
+            background-color: #005f6b;
+        }
+
+        /* Media queries */
         @media (max-width: 768px) {
             .flip-card-inner {
                 width: 70px;
@@ -145,6 +167,11 @@
             .message {
                 font-size: 0.9em;
                 padding: 0 5px;
+            }
+
+            .button-container button {
+                padding: 8px 16px;
+                font-size: 0.9em;
             }
         }
 
@@ -166,6 +193,11 @@
             .message {
                 font-size: 0.8em;
                 padding: 0 2px;
+            }
+
+            .button-container button {
+                padding: 6px 12px;
+                font-size: 0.8em;
             }
         }
     </style>
@@ -198,7 +230,6 @@
                 <img src="images/image5.jpg" alt="Image5">
             </a>
         </div>
-        <!-- Containerul pentru indicatori -->
         <div class="indicator-container"></div>
     </div>
 
@@ -246,10 +277,15 @@
         Vă așteptăm cu mare drag să ne revedem!
     </div>
 
+    <!-- Containerul pentru buton -->
+    <div class="button-container">
+        <button onclick="window.location.href='Inscriere.html'">Înscrie-te acum</button>
+    </div>
+
     <script>
         // Funcția pentru actualizarea counter-ului
         function updateCounter() {
-            const targetDate = new Date('2025-05-15T00:00:00'); // Specificați data țintă aici
+            const targetDate = new Date('2025-05-15T00:00:00');
             const now = new Date();
 
             const monthsCard = document.getElementById('months-card');
@@ -272,7 +308,6 @@
             minutes = totalMinutes % 60;
             seconds = totalSeconds % 60;
 
-            // Actualizăm fiecare card cu animația flip
             updateCard(monthsCard, months);
             updateCard(daysCard, days);
             updateCard(hoursCard, hours);
@@ -292,7 +327,7 @@
                 setTimeout(() => {
                     front.textContent = newValue;
                     card.classList.remove('flipped');
-                }, 600); // Durata animației de flip
+                }, 600);
             }
         }
 
@@ -331,8 +366,8 @@
 
         // Inițializăm slideshow-ul
         createIndicators();
-        showSlides(); // Inițializăm slideshow-ul
-        setInterval(showSlides, 3000); // Schimbă imaginea la fiecare 3 secunde
+        showSlides();
+        setInterval(showSlides, 3000);
 
         // Adăugăm evenimentul de click pentru schimbarea imaginii
         document.querySelectorAll('.slide').forEach(slide => {
@@ -341,7 +376,7 @@
 
         // Inițializăm counter-ul
         updateCounter();
-        setInterval(updateCounter, 1000); // Actualizează la fiecare secundă
+        setInterval(updateCounter, 1000);
     </script>
 </body>
 </html>
