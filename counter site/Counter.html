@@ -51,6 +51,7 @@
         .counter-container {
             display: flex;
             flex-wrap: wrap;
+<<<<<<< HEAD
             gap: 15px;
             justify-content: center;
             margin-top: 20px;
@@ -70,6 +71,39 @@
             justify-content: center;
             align-items: center;
             font-size: 2.5em;
+=======
+            gap: 5px;
+            justify-content: center;
+            margin-top: 10px;
+            margin-bottom: 5px; /* Spațiu mic pentru butonul de înscriere */
+        }
+
+        .flip-card {
+            perspective: 250px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 65px;
+            height: 50px;
+            text-align: center;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            transform-origin: bottom;
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8em;
+            background-color: #333;
+>>>>>>> 878b553cb82293f420877fbf413089c37bdc6345
             color: #fff;
             background-color: #333;
             border-radius: 50%;
