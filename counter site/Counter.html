@@ -20,9 +20,10 @@
 
         .slideshow-container {
             position: relative;
-            width: 80%;
+            width: 90%;
             max-width: 800px;
-            height: 400px;
+            height: 60vw;
+            max-height: 400px;
             margin-bottom: 20px;
             overflow: hidden;
             border-radius: 10px;
@@ -52,7 +53,9 @@
 
         .counter-container {
             display: flex;
+            flex-wrap: wrap;
             gap: 10px;
+            justify-content: center;
         }
 
         .flip-card {
@@ -61,8 +64,8 @@
 
         .flip-card-inner {
             position: relative;
-            width: 100px;
-            height: 120px;
+            width: 80px;
+            height: 100px;
             text-align: center;
             transform-style: preserve-3d;
             transition: transform 0.6s;
@@ -78,7 +81,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 2em;
+            font-size: 1.5em;
             background-color: #333;
             color: #fff; /* Alb pentru textul cardurilor */
             border-radius: 10px;
@@ -94,7 +97,7 @@
 
         .label {
             margin-top: 10px;
-            font-size: 1em;
+            font-size: 0.9em;
             color: #fff; /* Alb pentru textul labelurilor */
             text-align: center;
         }
@@ -120,10 +123,50 @@
 
         .message {
             margin-top: 20px;
-            font-size: 1.2em;
+            font-size: 1em;
             color: #fff; /* Alb pentru mesajul de sub counter */
             text-align: center;
-            padding: 0 20px;
+            padding: 0 10px;
+        }
+
+        /* Media queries pentru ecrane mici */
+        @media (max-width: 768px) {
+            .flip-card-inner {
+                width: 70px;
+                height: 90px;
+                font-size: 1.2em;
+            }
+
+            .counter-container {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .message {
+                font-size: 0.9em;
+                padding: 0 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slideshow-container {
+                height: 50vw;
+            }
+
+            .flip-card-inner {
+                width: 60px;
+                height: 80px;
+                font-size: 1em;
+            }
+
+            .label {
+                font-size: 0.8em;
+            }
+
+            .message {
+                font-size: 0.8em;
+                padding: 0 2px;
+            }
         }
     </style>
 </head>
@@ -143,6 +186,16 @@
         <div class="slide">
             <a href="images/image3.jpg" target="_blank">
                 <img src="images/image3.jpg" alt="Image3">
+            </a>
+        </div>
+        <div class="slide">
+            <a href="images/image4.jpg" target="_blank">
+                <img src="images/image4.jpg" alt="Image4">
+            </a>
+        </div>
+        <div class="slide">
+            <a href="images/image5.jpg" target="_blank">
+                <img src="images/image5.jpg" alt="Image5">
             </a>
         </div>
         <!-- Containerul pentru indicatori -->
@@ -190,7 +243,7 @@
 
     <!-- Mesaj de sub counter -->
     <div class="message">
-        Vă așteptăm cu mare drag și ne revedem!
+        Vă așteptăm cu mare drag să ne revedem!
     </div>
 
     <script>
