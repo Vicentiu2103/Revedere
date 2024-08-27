@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Counter cu Tranziție Imagini</title>
+    <title>Counter cu Efect de Roată</title>
     <style>
         body {
             display: flex;
@@ -48,83 +48,57 @@
             font-size: 0.9em;
         }
 
-        .slideshow-container {
-            position: relative;
-            width: 90%;
-            max-width: 800px;
-            height: 60vw;
-            max-height: 400px;
-            margin-top: 60px; /* Așezare sub header */
-            overflow: hidden;
-            border-radius: 10px;
-            background-color: #333;
-        }
-
-        .slide {
-            display: none;
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-        }
-
-        .slide a {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-
-        .slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
         .counter-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 15px;
             justify-content: center;
             margin-top: 20px;
-            margin-bottom: 10px; /* Spațiu mic pentru butonul de înscriere */
+            margin-bottom: 10px;
         }
 
-        .flip-card {
-            perspective: 1000px;
+        .counter-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .flip-card-inner {
-            position: relative;
+        .counter-inner {
             width: 80px;
-            height: 100px;
-            text-align: center;
-            transform-style: preserve-3d;
-            transition: transform 0.6s;
-            transform-origin: bottom;
-        }
-
-        .flip-card-front,
-        .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
+            height: 80px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.5em;
-            background-color: #333;
+            font-size: 2.5em;
             color: #fff;
-            border-radius: 10px;
+            background-color: #333;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.3s, transform 0.3s;
         }
 
-        .flip-card-back {
-            transform: rotateX(180deg);
+        .counter-inner::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.1), transparent);
+            top: -25%;
+            left: -25%;
+            transform: rotate(-45deg);
+            z-index: 0;
         }
 
-        .flip-card.flipped .flip-card-inner {
-            transform: rotateX(180deg);
+        .counter-inner span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .counter-inner:hover {
+            background-color: #444;
+            transform: scale(1.1);
         }
 
         .label {
@@ -134,28 +108,9 @@
             text-align: center;
         }
 
-        .indicator-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
-        }
-
-        .indicator {
-            width: 12px;
-            height: 12px;
-            background-color: #bbb;
-            border-radius: 50%;
-            display: inline-block;
-            margin: 0 2px;
-        }
-
-        .indicator.active {
-            background-color: #717171;
-        }
-
-        /* Stiluri pentru buton */
         .button-container {
             text-align: center;
+            margin-top: 20px;
         }
 
         .button-container button {
@@ -174,17 +129,11 @@
             background-color: #005f6b;
         }
 
-        /* Media queries */
         @media (max-width: 768px) {
-            .flip-card-inner {
-                width: 70px;
-                height: 90px;
-                font-size: 1.2em;
-            }
-
-            .counter-container {
-                flex-direction: column;
-                gap: 5px;
+            .counter-inner {
+                width: 60px;
+                height: 60px;
+                font-size: 1.8em;
             }
 
             .button-container button {
@@ -194,14 +143,10 @@
         }
 
         @media (max-width: 480px) {
-            .slideshow-container {
-                height: 50vw;
-            }
-
-            .flip-card-inner {
-                width: 60px;
-                height: 80px;
-                font-size: 1em;
+            .counter-inner {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5em;
             }
 
             .label {
@@ -220,71 +165,26 @@
         <h1>Clasa a XII-a E MI</h1>
     </header>
 
-    <!-- Containerul pentru slideshow -->
-    <div class="slideshow-container">
-        <div class="slide">
-            <a href="images/image1.jpg" target="_blank">
-                <img src="images/image1.jpg" alt="Image1">
-            </a>
-        </div>
-        <div class="slide">
-            <a href="images/image2.jpg" target="_blank">
-                <img src="images/image2.jpg" alt="Image2">
-            </a>
-        </div>
-        <div class="slide">
-            <a href="images/image3.jpg" target="_blank">
-                <img src="images/image3.jpg" alt="Image3">
-            </a>
-        </div>
-        <div class="slide">
-            <a href="images/image4.jpg" target="_blank">
-                <img src="images/image4.jpg" alt="Image4">
-            </a>
-        </div>
-        <div class="slide">
-            <a href="images/image5.jpg" target="_blank">
-                <img src="images/image5.jpg" alt="Image5">
-            </a>
-        </div>
-        <div class="indicator-container"></div>
-    </div>
-
     <!-- Containerul pentru counter -->
     <div class="counter-container">
-        <div class="flip-card">
-            <div class="flip-card-inner" id="months-card">
-                <div class="flip-card-front">0</div>
-                <div class="flip-card-back">0</div>
-            </div>
+        <div class="counter-item">
+            <div class="counter-inner" id="months-counter">0</div>
             <div class="label">Luni</div>
         </div>
-        <div class="flip-card">
-            <div class="flip-card-inner" id="days-card">
-                <div class="flip-card-front">0</div>
-                <div class="flip-card-back">0</div>
-            </div>
+        <div class="counter-item">
+            <div class="counter-inner" id="days-counter">0</div>
             <div class="label">Zile</div>
         </div>
-        <div class="flip-card">
-            <div class="flip-card-inner" id="hours-card">
-                <div class="flip-card-front">0</div>
-                <div class="flip-card-back">0</div>
-            </div>
+        <div class="counter-item">
+            <div class="counter-inner" id="hours-counter">0</div>
             <div class="label">Ore</div>
         </div>
-        <div class="flip-card">
-            <div class="flip-card-inner" id="minutes-card">
-                <div class="flip-card-front">0</div>
-                <div class="flip-card-back">0</div>
-            </div>
+        <div class="counter-item">
+            <div class="counter-inner" id="minutes-counter">0</div>
             <div class="label">Minute</div>
         </div>
-        <div class="flip-card">
-            <div class="flip-card-inner" id="seconds-card">
-                <div class="flip-card-front">0</div>
-                <div class="flip-card-back">0</div>
-            </div>
+        <div class="counter-item">
+            <div class="counter-inner" id="seconds-counter">0</div>
             <div class="label">Secunde</div>
         </div>
     </div>
@@ -307,11 +207,11 @@
             const targetDate = new Date('2025-05-15T00:00:00');
             const now = new Date();
 
-            const monthsCard = document.getElementById('months-card');
-            const daysCard = document.getElementById('days-card');
-            const hoursCard = document.getElementById('hours-card');
-            const minutesCard = document.getElementById('minutes-card');
-            const secondsCard = document.getElementById('seconds-card');
+            const monthsCounter = document.getElementById('months-counter');
+            const daysCounter = document.getElementById('days-counter');
+            const hoursCounter = document.getElementById('hours-counter');
+            const minutesCounter = document.getElementById('minutes-counter');
+            const secondsCounter = document.getElementById('seconds-counter');
 
             let months, days, hours, minutes, seconds;
 
@@ -327,71 +227,12 @@
             minutes = totalMinutes % 60;
             seconds = totalSeconds % 60;
 
-            updateCard(monthsCard, months);
-            updateCard(daysCard, days);
-            updateCard(hoursCard, hours);
-            updateCard(minutesCard, minutes);
-            updateCard(secondsCard, seconds);
+            monthsCounter.textContent = months;
+            daysCounter.textContent = days;
+            hoursCounter.textContent = hours;
+            minutesCounter.textContent = minutes;
+            secondsCounter.textContent = seconds;
         }
-
-        // Funcția pentru animația de flip
-        function updateCard(card, newValue) {
-            const front = card.querySelector('.flip-card-front');
-            const back = card.querySelector('.flip-card-back');
-
-            if (front.textContent != newValue) {
-                back.textContent = newValue;
-                card.classList.add('flipped');
-
-                setTimeout(() => {
-                    front.textContent = newValue;
-                    card.classList.remove('flipped');
-                }, 600);
-            }
-        }
-
-        // Funcția pentru schimbarea imaginii
-        let slideIndex = 0;
-        function showSlides() {
-            const slides = document.querySelectorAll('.slide');
-            const indicators = document.querySelectorAll('.indicator');
-            slides.forEach((slide, index) => {
-                slide.style.display = 'none';
-                indicators[index].classList.remove('active');
-            });
-            slideIndex++;
-            if (slideIndex > slides.length) {
-                slideIndex = 1;
-            }
-            slides[slideIndex - 1].style.display = 'block';
-            indicators[slideIndex - 1].classList.add('active');
-        }
-
-        // Adăugăm indicatorii
-        function createIndicators() {
-            const slides = document.querySelectorAll('.slide');
-            const indicatorContainer = document.querySelector('.indicator-container');
-            slides.forEach(() => {
-                const indicator = document.createElement('span');
-                indicator.className = 'indicator';
-                indicatorContainer.appendChild(indicator);
-            });
-        }
-
-        // Funcția pentru a merge la următoarea imagine la click
-        function nextSlide() {
-            showSlides();
-        }
-
-        // Inițializăm slideshow-ul
-        createIndicators();
-        showSlides();
-        setInterval(showSlides, 3000);
-
-        // Adăugăm evenimentul de click pentru schimbarea imaginii
-        document.querySelectorAll('.slide').forEach(slide => {
-            slide.addEventListener('click', nextSlide);
-        });
 
         // Inițializăm counter-ul
         updateCounter();
