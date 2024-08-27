@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter cu Tranziție Imagini</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background: url('images/mountain-landscape.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            color: #fff; /* Text alb pentru a fi vizibil pe fundal întunecat */
+        }
+
+        .slideshow-container {
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+            height: 400px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border-radius: 10px;
+            background-color: #333; /* Culoare de fundal pentru cazul în care nu sunt imagini */
+        }
+
+        .slide {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .slide a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .counter-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .flip-card {
+            perspective: 1000px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100px;
+            height: 120px;
+            text-align: center;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            transform-origin: bottom;
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            background-color: #333;
+            color: #fff; /* Alb pentru textul cardurilor */
+            border-radius: 10px;
+        }
+
+        .flip-card-back {
+            transform: rotateX(180deg);
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateX(180deg);
+        }
+
+        .label {
+            margin-top: 10px;
+            font-size: 1em;
+            color: #fff; /* Alb pentru textul labelurilor */
+            text-align: center;
+        }
+
+        .indicator-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 2px;
+        }
+
+        .indicator.active {
+            background-color: #717171;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #fff; /* Alb pentru mesajul de sub counter */
+            text-align: center;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Containerul pentru slideshow -->
+    <div class="slideshow-container">
+        <div class="slide">
+            <a href="images/image1.jpg" target="_blank">
+                <img src="images/image1.jpg" alt="Image1">
+            </a>
+        </div>
+        <div class="slide">
+            <a href="images/image2.jpg" target="_blank">
+                <img src="images/image2.jpg" alt="Image2">
+            </a>
+        </div>
+        <div class="slide">
+            <a href="images/image3.jpg" target="_blank">
+                <img src="images/image3.jpg" alt="Image3">
+            </a>
+        </div>
+        <!-- Containerul pentru indicatori -->
+        <div class="indicator-container"></div>
+    </div>
+
+    <!-- Containerul pentru counter -->
+    <div class="counter-container">
+        <div class="flip-card">
+            <div class="flip-card-inner" id="months-card">
+                <div class="flip-card-front">0</div>
+                <div class="flip-card-back">0</div>
+            </div>
+            <div class="label">Luni</div>
+        </div>
+        <div class="flip-card">
+            <div class="flip-card-inner" id="days-card">
+                <div class="flip-card-front">0</div>
+                <div class="flip-card-back">0</div>
+            </div>
+            <div class="label">Zile</div>
+        </div>
+        <div class="flip-card">
+            <div class="flip-card-inner" id="hours-card">
+                <div class="flip-card-front">0</div>
+                <div class="flip-card-back">0</div>
+            </div>
+            <div class="label">Ore</div>
+        </div>
+        <div class="flip-card">
+            <div class="flip-card-inner" id="minutes-card">
+                <div class="flip-card-front">0</div>
+                <div class="flip-card-back">0</div>
+            </div>
+            <div class="label">Minute</div>
+        </div>
+        <div class="flip-card">
+            <div class="flip-card-inner" id="seconds-card">
+                <div class="flip-card-front">0</div>
+                <div class="flip-card-back">0</div>
+            </div>
+            <div class="label">Secunde</div>
+        </div>
+    </div>
+
+    <!-- Mesaj de sub counter -->
+    <div class="message">
+        Vă așteptăm cu mare drag și ne revedem!
+    </div>
+
+    <script>
+        // Funcția pentru actualizarea counter-ului
+        function updateCounter() {
+            const targetDate = new Date('2025-05-15T00:00:00'); // Specificați data țintă aici
+            const now = new Date();
+
+            const monthsCard = document.getElementById('months-card');
+            const daysCard = document.getElementById('days-card');
+            const hoursCard = document.getElementById('hours-card');
+            const minutesCard = document.getElementById('minutes-card');
+            const secondsCard = document.getElementById('seconds-card');
+
+            let months, days, hours, minutes, seconds;
+
+            const totalMonths = (targetDate.getFullYear() - now.getFullYear()) * 12 + (targetDate.getMonth() - now.getMonth());
+            const totalDays = Math.floor((targetDate - now) / (1000 * 60 * 60 * 24));
+            const totalHours = Math.floor((targetDate - now) / (1000 * 60 * 60));
+            const totalMinutes = Math.floor((targetDate - now) / (1000 * 60));
+            const totalSeconds = Math.floor((targetDate - now) / 1000);
+
+            months = totalMonths;
+            days = totalDays % 30;
+            hours = totalHours % 24;
+            minutes = totalMinutes % 60;
+            seconds = totalSeconds % 60;
+
+            // Actualizăm fiecare card cu animația flip
+            updateCard(monthsCard, months);
+            updateCard(daysCard, days);
+            updateCard(hoursCard, hours);
+            updateCard(minutesCard, minutes);
+            updateCard(secondsCard, seconds);
+        }
+
+        // Funcția pentru animația de flip
+        function updateCard(card, newValue) {
+            const front = card.querySelector('.flip-card-front');
+            const back = card.querySelector('.flip-card-back');
+
+            if (front.textContent != newValue) {
+                back.textContent = newValue;
+                card.classList.add('flipped');
+
+                setTimeout(() => {
+                    front.textContent = newValue;
+                    card.classList.remove('flipped');
+                }, 600); // Durata animației de flip
+            }
+        }
+
+        // Funcția pentru schimbarea imaginii
+        let slideIndex = 0;
+        function showSlides() {
+            const slides = document.querySelectorAll('.slide');
+            const indicators = document.querySelectorAll('.indicator');
+            slides.forEach((slide, index) => {
+                slide.style.display = 'none';
+                indicators[index].classList.remove('active');
+            });
+            slideIndex++;
+            if (slideIndex > slides.length) {
+                slideIndex = 1;
+            }
+            slides[slideIndex - 1].style.display = 'block';
+            indicators[slideIndex - 1].classList.add('active');
+        }
+
+        // Adăugăm indicatorii
+        function createIndicators() {
+            const slides = document.querySelectorAll('.slide');
+            const indicatorContainer = document.querySelector('.indicator-container');
+            slides.forEach(() => {
+                const indicator = document.createElement('span');
+                indicator.className = 'indicator';
+                indicatorContainer.appendChild(indicator);
+            });
+        }
+
+        // Funcția pentru a merge la următoarea imagine la click
+        function nextSlide() {
+            showSlides();
+        }
+
+        // Inițializăm slideshow-ul
+        createIndicators();
+        showSlides(); // Inițializăm slideshow-ul
+        setInterval(showSlides, 3000); // Schimbă imaginea la fiecare 3 secunde
+
+        // Adăugăm evenimentul de click pentru schimbarea imaginii
+        document.querySelectorAll('.slide').forEach(slide => {
+            slide.addEventListener('click', nextSlide);
+        });
+
+        // Inițializăm counter-ul
+        updateCounter();
+        setInterval(updateCounter, 1000); // Actualizează la fiecare secundă
+    </script>
+</body>
+</html>
